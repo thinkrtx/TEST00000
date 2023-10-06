@@ -26,7 +26,7 @@ jobs:
 
       run: .\ngrok\ngrok.exe authtoken $Env:NGROK_AUTH_TOKEN
       run : ngrok config add-authtoken 2WL3IJX4H1cqv9hJe2vE6rQ6nfA_2UzwACfpgo3rkQrqCc1Pk
-
+     
       env:
 
         NGROK_AUTH_TOKEN: ${{ secrets.NGROK_AUTH_TOKEN }}
@@ -34,8 +34,12 @@ jobs:
     - name: Enable TS
 
       run: Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server'-name "fDenyTSConnections" -Value 0
-
+       run : Install-Module -Name PowerShellGet -Force
     - run: Enable-NetFirewallRule -DisplayGroup "Remote Desktop"
+      run : Install-Module -Name RDWebClientManagement
+      run : Install-RDWebClientPackage
+      run : Publish-RDWebClientPackage -Type Production -Latest
+      run : Get-Command -Module RDWebClientManagement
 
     - run: Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp' -name "UserAuthentication" -Value 1
 
